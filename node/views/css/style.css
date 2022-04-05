@@ -1,0 +1,22 @@
+/* CodePen demo */
+body {
+    background: #66CDAA;
+    color: #000000;
+    text-align: center;
+    font-family: Arial, Helvetica;
+  }
+
+  h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 14px;
+  }
+
+  .select1 {
+    background: #B0E0E6;
+    color: #000000;
+    width: 30%;
+    height: 1.6em;
+    font-size: 1.6em;
+  }

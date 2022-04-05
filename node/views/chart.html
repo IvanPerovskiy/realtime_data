@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<script type="text/javascript">
+window.onload = function() {
+	var dataPoints = [];
+	var chart;
+	const v = new URLSearchParams(window.location.search);
+
+	$.getJSON("http://127.0.0.1/api/" + v.get('ticker_id'), function(data) {
+		var history = data['history'];
+		$.each(history, function(key, value){
+			console.log(value)
+			dataPoints.push({x: value[0], y: parseInt(value[1])});
+		});
+		chart = new CanvasJS.Chart("chartContainer",{
+			title:{
+				text:"График изменения цены. Торговый инструмент: " + data['name'] 
+			},
+			axisX: {						
+				title: "Время с."
+			},
+			axisY: {						
+				title: "Цена $"
+			},
+			data: [{
+				type: "line",
+				dataPoints : dataPoints,
+			}]
+		});
+		chart.render();
+		updateChart();
+	});
+	function updateChart() {
+	$.getJSON("http://127.0.0.1/api/"+ v.get('ticker_id') + "?start=" + dataPoints.length, function(data) {
+		var history = data['history'];
+		$.each(history, function(key, value) {
+			dataPoints.push({
+			x: parseInt(value[0]),
+			y: parseInt(value[1])
+			});
+		});
+		chart.render();
+		setTimeout(function(){updateChart()}, 1000);
+	});
+	}
+}
+</script>
+<script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</head>
+<body>
+<div id="chartContainer" style="height: 300px; width: 100%;"></div>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <link rel="stylesheet" href="css/style.css">
+	<script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+	<script type="text/javascript">
+		jQuery(document).ready(function ($) {
+			const app = $("#app");
+			const select = app.find(".select1");
+			$.ajax({
+				url: "http://127.0.0.1/api",
+				type: "GET",
+				//'data': data,
+				dataType: "json",
+				success: function (data) {
+				//console.log(' ~ data', data);
+				let out = data.map((item) => {
+					console.log(' ~ item', item);        
+					return '<option value="http://127.0.0.1:7070/chart?ticker_id=' + item.id + '">' + item.name + "</option>";
+				});
+				select.html(out);
+				},
+			});
+		});
+	</script>
+</head>
+<body>
+    <h1>Список торговых инструментов</h1>
+    <h2>Прототип сервиса по получению и предпросмотру торговых данных.
+        Для просмотра графика выберите инструмент из списка.
+    </h2>
+
+    <span class="color-picker"></span>
+
+    <br/><br/>
+	<div id="app">
+		<select class="select1" onchange="if (this.value) window.location.href = this.value">            
+		</select>
+	</div>
+</body>
+</html>

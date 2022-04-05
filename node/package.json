@@ -1,0 +1,16 @@
+{
+  "name": "realtime-data-ui",
+  "version": "1.0.0",
+  "description": "realtime data ui",
+  "author": "ivanperovsky@gmail.com",
+  "license": "MIT",
+  "main": "app.js",
+  "keywords": [
+    "nodejs",
+    "bootstrap",
+    "express"
+  ],
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
